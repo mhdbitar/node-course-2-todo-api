@@ -10,22 +10,15 @@ const {
 const {
     Todo
 } = require('./../modules/todo');
+const {
+    todos,
+    populateTodos,
+    users,
+    populateUsers
+} = require('./seed/seed');
 
-const todos = [{
-    _id: new ObjectId(),
-    text: 'First test todo'
-}, {
-    _id: new ObjectId(),
-    text: 'Second test todo',
-    completed: true,
-    completedAt: 333
-}];
-
-beforeEach((done) => {
-    Todo.remove({}).then(() => {
-        return Todo.insertMany(todos);
-    }).then(() => done());
-});
+beforeEach(populateUsers);
+beforeEach(populateTodos);
 
 describe('POST /todos', () => {
     it('should create a new todo', (done) => {
